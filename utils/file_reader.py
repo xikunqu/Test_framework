@@ -1,8 +1,7 @@
 """
-文件读取。YamlReader读取yaml文件，ExcelReader读取excel。
+文件读取
 """
-import yaml
-import os
+import os,yaml,csv
 from xlrd import open_workbook
 
 
@@ -22,6 +21,26 @@ class YamlReader:
                 self._data = list(yaml.safe_load_all(f))  # load后是个generator，用list组织成列表
         return self._data
 
+
+
+class CsvReader:
+    def __init__(self, csvf):
+        #csvf存在返回True
+        if os.path.exists(csvf):
+            self.csvf = csvf
+        else:
+            raise FileNotFoundError('文件不存在！')
+        self._data = list()
+
+    @property
+    def data(self):
+        # 如果是第一次调用data，读取csv文档，否则直接返回之前保存的数据
+        if not self._data:
+            with open(self.csvf,encoding='utf-8',newline='') as f:
+                f_csv = csv.reader(f)
+                for line in f_csv:
+                    self._data.append(line)
+        return self._data
 
 class SheetTypeError(Exception):
     pass
