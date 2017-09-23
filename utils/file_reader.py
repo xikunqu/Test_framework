@@ -33,11 +33,21 @@ class CsvReader:
         self._data = list()
 
     @property
-    def data(self):
+    def getlist(self):
         # 如果是第一次调用data，读取csv文档，否则直接返回之前保存的数据
         if not self._data:
             with open(self.csvf,encoding='utf-8',newline='') as f:
                 f_csv = csv.reader(f)
+                for line in f_csv:
+                    self._data.append(line)
+        return self._data
+
+    @property
+    def getdict(self):
+        # 如果是第一次调用data，读取csv文档，否则直接返回之前保存的数据
+        if not self._data:
+            with open(self.csvf, encoding='utf-8', newline='') as f:
+                f_csv = csv.DictReader(f)
                 for line in f_csv:
                     self._data.append(line)
         return self._data
@@ -99,10 +109,6 @@ class ExcelReader:
 
 
 if __name__ == '__main__':
-    y = 'E:\Test_framework\config\config.yml'
-    reader = YamlReader(y)
-    print(reader.data)
-
-    e = 'E:/Test_framework/data/baidu.xlsx'
-    reader = ExcelReader(e, title_line=True)
-    print(reader.data)
+    c= 'E:\PythonCode\Test_framework\data\data.csv'
+    reader =CsvReader(c)
+    print(reader.getdict)
