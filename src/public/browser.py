@@ -5,13 +5,14 @@ from selenium import webdriver
 from utils.config import DRIVER_PATH, DOCS_PATH
 
 # 可根据需要自行扩展
+FIREFOXDRIVER_PATH= DRIVER_PATH + '\geckodriver.exe'
 CHROMEDRIVER_PATH = DRIVER_PATH + '\chromedriver.exe'
 IEDRIVER_PATH = DRIVER_PATH + '\IEDriverServer.exe'
 PHANTOMJSDRIVER_PATH = DRIVER_PATH + '\phantomjs.exe'
 IMG_PATH=os.path.join(DOCS_PATH,'img')
 
 TYPES = {'firefox': webdriver.Firefox, 'chrome': webdriver.Chrome, 'ie': webdriver.Ie, 'phantomjs': webdriver.PhantomJS}
-EXECUTABLE_PATH = {'firefox': 'wires', 'chrome': CHROMEDRIVER_PATH, 'ie': IEDRIVER_PATH, 'phantomjs': PHANTOMJSDRIVER_PATH}
+EXECUTABLE_PATH = {'firefox':FIREFOXDRIVER_PATH, 'chrome': CHROMEDRIVER_PATH, 'ie': IEDRIVER_PATH, 'phantomjs': PHANTOMJSDRIVER_PATH}
 
 
 class UnSupportBrowserTypeError(Exception):
@@ -52,3 +53,7 @@ class Browser(object):
         self.driver.quit()
 
 
+if __name__=="__main__":
+    url="http://www.baidu.com"
+    browser=Browser('firefox')
+    browser.get(url)

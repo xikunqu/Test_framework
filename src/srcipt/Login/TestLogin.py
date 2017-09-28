@@ -25,7 +25,7 @@ class TestLogin(unittest.TestCase):
 
     def test_login(self):
         self.login_page.get(self.LoginURL)
-        datas=CsvReader(self.csv).data
+        datas=CsvReader(self.csv).getlist
         n=len(datas)
         print("用户数据为%d组"%n)
         for data in datas:
