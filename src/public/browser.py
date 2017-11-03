@@ -28,8 +28,8 @@ class Browser(object):
             raise UnSupportBrowserTypeError('仅支持%s!' % ', '.join(TYPES.keys()))
         self.driver = None
 
-    def get(self, url, maximize_window=True, implicitly_wait=30):
-        self.driver = self.browser(executable_path=EXECUTABLE_PATH[self._type])
+    def get(self, url, maximize_window=True, implicitly_wait=30,**kwargs):
+        self.driver = self.browser(executable_path=EXECUTABLE_PATH[self._type],**kwargs)
         self.driver.get(url)
         if maximize_window:
             self.driver.maximize_window()
