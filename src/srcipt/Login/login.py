@@ -10,10 +10,10 @@ import time,os
 from utils.config import Config,DATA_PATH
 from utils.file_reader import CsvReader
 
-LoginURL =Config().get('LoginURL')
+LoginURL =Config().getvalue('LoginURL')
 csv_path=os.path.join(DATA_PATH,'login_data')
 csv=csv_path+'/login.csv'
-datas = CsvReader(csv).data
+datas = CsvReader(csv).getlist
 #base_path=os.path.dirname(os.path.abspath(__file__))+'\..'
 #driver_path=os.path.abspath(base_path+'\drivers\chromedriver.exe')
 
